@@ -1,0 +1,53 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.el {
+    background-color: white;
+    height: 200px;
+    width: 400px;
+    box-sizing: border-box;
+    margin: 20px 20px;
+    border: outset; 
+    display: flex;
+}
+
+.blocks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    background-color: lightgray;
+    height: calc(100vh - 153px)
+}
+
+.TextDiv {
+    padding: 20px;
+    display: block;
+    margin: 0 5px;
+    width: 60%;  
+}
+
+.TextDiv h3 {
+    color: blue;
+}
+
+.TextDiv span {
+    padding: 5px 0;  
+    display: block; 
+}
+
+.TopDiv {
+    background-color: lawngreen;
+}
+
+.ImgDiv {
+    background-image: url('../../img/1.jpg');
+    background-size: cover;
+    background-position: right;
+    height: 100%;
+    width: 40%;
+}
+
+

@@ -1,0 +1,22 @@
+.wrapper {
+    background-color: rgb(75, 85, 221);
+    width: 200px;
+    display: block;
+}
+
+.NavLink {
+    box-sizing: border-box;
+    margin: 10px auto;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px dotted white;
+}
+
+.NavLink a {
+    text-decoration: none;
+    color: lightcyan;
+}
+.NavLink a:hover {
+    color: rgb(168, 177, 128);
+}

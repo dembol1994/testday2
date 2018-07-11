@@ -1,0 +1,142 @@
+.content {
+    background-color: lightgray;
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    margin: 15px auto;
+    width: 90%;
+    height: auto;
+    background-color: white;
+    border: 1px outset;
+}
+
+.topDiv {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 0 0 20px;
+}
+
+.addText {
+    padding: 5px 0;
+    font-size: 20px;
+    color: blue;
+}
+
+.requireText {
+    font-size: 10px;
+    color:rgb(94, 38, 38);
+}
+
+.middleDiv {
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    height: auto;
+    width: 100%;
+}
+
+.formDiv {
+    width: 50%;
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+
+.topFormDiv {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+}
+
+.middleFormDiv {
+    position: relative;
+    margin: 10px 0;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.uploadButton {
+    height: 30px;
+    background-color: inherit;
+    border: none;
+    color: blue;
+    padding: 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.rightForm {
+    box-sizing: border-box;
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.hidden {
+    display: none;
+}
+
+.leftForm {
+    box-sizing: border-box;
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.imgDiv {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin: 10px 10px;
+}
+
+.imgDiv label {
+    font-size: 10px;
+}
+
+.img {
+    margin-top: 8px;
+    background-image: url('../../img/3.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 200px;
+}
+
+.bottomDiv {
+    height: 100px;
+    width: 100%;
+}
+
+.bottomDiv button {
+    height: 30px;
+    width: 70px;
+    box-sizing: border-box;
+    margin: 35px 10px;
+    cursor: pointer;
+}
+
+.Save:disabled {
+    background-color: inherit;
+    border: none;
+    color: grey;
+    cursor: not-allowed;
+}
+
+.Cancel {
+    cursor: pointer;
+    background-color: inherit;
+    border: none;
+    color: grey;
+}
+
+.Save {
+    background-color: aquamarine;
+    border-radius: 10px;
+    border-color: aquamarine;
+}
+
+.bottomDiv div {
+    text-align: center;
+}

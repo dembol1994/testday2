@@ -1,0 +1,43 @@
+.wrapper {
+    background-color: white;
+    height: 50px;
+    border-bottom: outset;  
+    display: flex;
+    font-size: 20px;
+    position: relative;
+}
+
+.wrapper div {
+    padding: 15px;
+}
+
+.wrapper a {
+    text-decoration: none;
+}
+
+.newPage {
+    position: absolute;
+    right: 20px;
+    top: 0;
+}
+
+.newPage a {
+    color: #1f71e2;
+}
+
+.navLinks {
+    display: flex;
+    align-items: center;
+}
+
+.navLinks a {
+    color: black;
+}
+
+.newPage a:active {
+    color: black;
+}
+
+.activeNavLink {
+    color: #1f71e2;
+}
