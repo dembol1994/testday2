@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import classes from './AddNew.css';
 
 import validator from 'validator';
-import axios from 'axios';
+import {connect} from 'react-redux'
 
 import Toolbar from '../../components/Layout/ToolbarAddNew/ToolbarAddNew';
 import Input from '../../components/UI/Input/Input';
+
+import * as actions from '../../store/actions/actions';
 
 class AddNew extends Component {
 
@@ -39,7 +41,8 @@ class AddNew extends Component {
                 type: 'number',
                 value: '',validation: {
                     isReq: true,
-                    minValue: 0
+                    minValue: 0,
+                    isNum: true
                 },
                 touched: false,
                 valid: false
@@ -51,7 +54,8 @@ class AddNew extends Component {
                 value: '',
                 validation: {
                     isReq: true,
-                    minValue: 0
+                    minValue: 0,
+                    isNum: true
                 },
                 touched: false,
                 valid: false
@@ -63,7 +67,8 @@ class AddNew extends Component {
                 value: '',
                 validation: {
                     isReq: true,
-                    minValue: 0
+                    minValue: 0,
+                    isNum: true
                 },
                 touched: false,
                 valid: false
@@ -96,22 +101,11 @@ class AddNew extends Component {
     }
 
     onSaveHandler = () => {
-        let data = [];
+        let data = {};
         for(let key in this.state.formField) {
-            data.push({
-                identName: key,
-                value: this.state.formField[key].value
-            })
+            data[key] = this.state.formField[key].value
         }
-
-        axios.post('http://localhost:5000/services', data )
-            .then(res => {
-                console.log('service added')
-                this.props.history.replace('/')
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        this.props.postData(data, this.props.history);
     };
 
     onCancelHandler = () => {
@@ -127,6 +121,11 @@ class AddNew extends Component {
 
         if (rules.hasOwnProperty('minValue')) {
             isValid = value >= rules.minValue && isValid;
+        }
+        if (rules.hasOwnProperty('isNum')) {
+            console.log(value);
+            console.log(validator.isDecimal(value))
+            isValid = validator.isDivisibleBy(value, 1) && isValid;
         }
 
         return isValid;
@@ -263,4 +262,10 @@ class AddNew extends Component {
     }
 }
 
-export default AddNew;
+const mapDispatchToProps = dispatch => {
+    return {
+        postData: (data, history) => dispatch(actions.postData(data, history))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(AddNew);

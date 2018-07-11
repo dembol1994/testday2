@@ -24,7 +24,9 @@ class Toolbar extends Component {
     }
 
     onClickHandler = (id) => {
+        console.log(id)
         this.props.onClick(id);
+        this.props.fetchData(id)
     };
 
     render() {
@@ -54,7 +56,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onClick: (id) => dispatch(action.changeActive(id))
+        onClick: (id) => dispatch(action.changeActive(id)),
+        fetchData: (id) => dispatch(action.fetchData(id))
     }
 }
 

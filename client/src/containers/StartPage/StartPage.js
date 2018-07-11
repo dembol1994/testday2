@@ -1,8 +1,13 @@
 import React, {Component} from 'react';
 
 import classes from './StartPage.css';
+import axios from 'axios';
+
+import {connect} from 'react-redux';
+import * as action from '../../store/actions/actions';
 
 import ToolbarStart from '../../components/Layout/ToolbarStartPage/ToolbarStartPage'
+
 class StartPage extends Component {
         state = {
             blocks: {           
@@ -29,26 +34,25 @@ class StartPage extends Component {
             
         }
         }
-
+        componentDidMount() {
+            console.log(this.props.loading)
+            this.props.dataFetch();
+        }
 
     render() {
-        let arrOfEl = [];
-        for (let key in this.state.blocks) {
-            arrOfEl.push({
-                key: key,
-                config: this.state.blocks[key]
-            })
-        }
+       
         return (
             <div className={classes.wrapper}>
             <ToolbarStart/>
             <div className={classes.blocks}>                
-                    {arrOfEl.map(el => {
-                    return <div key={el.key} className={classes.el}> 
+                    {this.props.services.map(el => {
+                    return <div key={el.id} className={classes.el}> 
                     <div className={classes.TextDiv}>
-                        <h3>{el.config.textAbove}</h3>
-                        <span>{el.config.text}</span>
-                        <span>Booking Count: {el.config.count}</span>
+                        <h3>{el.body.name}</h3>
+                        <span>{el.body.subtitle}</span>
+                        <span>Max Hours: {el.body.maxHours}</span>
+                        <span>Min Hours: {el.body.minHours}</span>
+                        <span>Price Per Hour: {el.body.pricePerHour}</span>
                     </div>
                     <div className={classes.ImgDiv}></div>
                     </div>
@@ -59,4 +63,17 @@ class StartPage extends Component {
     }
 }
 
-export default StartPage;
+const mapDispatchToProps = dispatch => {
+    return {
+        dataFetch: () => dispatch(action.fetchData())
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        services: state.services,
+        loading: state.loading
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StartPage);
