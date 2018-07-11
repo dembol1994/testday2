@@ -7,15 +7,19 @@
     position: relative;
 }
 
-.wrapper div {
-    padding: 15px;
-}
 
 .wrapper a {
     text-decoration: none;
 }
 
+.wrapper div {
+    box-sizing: border-box;
+    padding: 15px;
+    cursor: pointer;
+}
+
 .newPage {
+    padding: 15px;
     position: absolute;
     right: 20px;
     top: 0;
@@ -30,7 +34,7 @@
     align-items: center;
 }
 
-.navLinks a {
+.navLinks {
     color: black;
 }
 
@@ -39,5 +43,5 @@
 }
 
 .activeNavLink {
-    color: #1f71e2;
+    color: blue;
 }

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import classes from './AddNew.css';
 
 import validator from 'validator';
+import axios from 'axios';
 
 import Toolbar from '../../components/Layout/ToolbarAddNew/ToolbarAddNew';
 import Input from '../../components/UI/Input/Input';
@@ -70,7 +71,7 @@ class AddNew extends Component {
             whiteIcon: {
                 label: 'BLUE ICON',
                 type: 'file',
-                value: '',
+                value: 'icon1',
                 validation: {
                     isReq: true
                 }
@@ -78,14 +79,14 @@ class AddNew extends Component {
             blueIcon: {
                 label: 'BLUE ICON',
                 type: 'file',
-                value: '',
+                value: 'icon2',
                 validation: {
                     isReq: true
                 }
             },
             usersImage: {
                 type: 'file',
-                value: '',
+                value: 'icon3',
                 validation: {
                     isReq: true
                 }
@@ -95,7 +96,22 @@ class AddNew extends Component {
     }
 
     onSaveHandler = () => {
-        console.log('save');
+        let data = [];
+        for(let key in this.state.formField) {
+            data.push({
+                identName: key,
+                value: this.state.formField[key].value
+            })
+        }
+
+        axios.post('http://localhost:5000/services', data )
+            .then(res => {
+                console.log('service added')
+                this.props.history.replace('/')
+            })
+            .catch(err => {
+                console.log(err)
+            })
     };
 
     onCancelHandler = () => {
@@ -123,7 +139,6 @@ class AddNew extends Component {
                 isValid = formObj[key].valid && isValid
             }
         }
-        console.log(isValid);
         return isValid;
     }
 
@@ -136,7 +151,6 @@ class AddNew extends Component {
         updForm.valid = this.onValidHandler(e.target.value, this.state.formField[id].validation);
 
         updState[id] = updForm;
-        console.log(updForm.valid + ' ' + updForm.touched)
 
         this.setState({formField: updState, isFormValid: this.isFormValid(updState)})
     };

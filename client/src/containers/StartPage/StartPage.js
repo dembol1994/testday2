@@ -39,7 +39,6 @@ class StartPage extends Component {
                 config: this.state.blocks[key]
             })
         }
-        console.log(arrOfEl)
         return (
             <div className={classes.wrapper}>
             <ToolbarStart/>

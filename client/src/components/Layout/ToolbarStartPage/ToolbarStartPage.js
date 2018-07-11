@@ -1,38 +1,61 @@
-import React from 'react';
+import React, {Component} from 'react';
 import classes from './ToolbarStartPage.css';
-import {Link, NavLink,} from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
-const toolbar = (props) => {
+import * as action from '../../../store/actions/actions';
 
-    let arrOfLinks = [
-        {
-            to: '/?page=active',
-            activ: 'false',
-            text: 'Active'
-        },
-        {
-            to: '/?page=inactive',
-            activ: 'false',
-            text: 'Inactive'
-        },
-        {
-            to: '/?page=all',
-            activ: 'true',
-            text: 'All'
-        },
+class Toolbar extends Component {
+    state = {
+        links: [
+            {
+                id: 'inactive',
+                text: 'Inactive'
+            },
+            {
+                id: 'active',
+                text: 'Active'
+            },
+            {
+                id: 'all',
+                text: 'All'
+            }
+        ]
+    }
 
-    ]
+    onClickHandler = (id) => {
+        this.props.onClick(id);
+    };
 
-    return (
+    render() {
+        return (
         <div className={classes.wrapper}>
             <div className={classes.navLinks}>
-                <div><NavLink activeClassName={classes.activeNavLink} to='/?page=active'>Active</NavLink></div>
-                <div><NavLink activeClassName={classes.activeNavLink} to='/?page=inactiv'>Inactiv</NavLink></div>
-                <div><NavLink activeClassName={classes.activeNavLink} to='/?page=all'>All</NavLink></div>
-            </div>
+                {this.state.links.map(el => {
+                   let cssClass = null;
+                   el.id === this.props.active ? cssClass = classes.activeNavLink : cssClass = classes.navLinks;
+                    return <div 
+                            onClick={() => this.onClickHandler(el.id)} 
+                            key={el.id} 
+                            className={cssClass}>{el.text}</div>
+                })}
+                </div>
             <div className={classes.newPage}><Link to='/addnew'>ADD NEW SERVICE</Link></div>
         </div>
-    )
+        )
+    }
 }
 
-export default toolbar;
+const mapStateToProps = state => {
+    return {
+        active: state.activeButton
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onClick: (id) => dispatch(action.changeActive(id))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);
