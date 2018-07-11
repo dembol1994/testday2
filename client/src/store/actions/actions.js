@@ -12,13 +12,13 @@ const connectStart = () => {
     return {
         type: actionTypes.CONNECT_START
     }
-}
+};
 
 const connectFinish = () => {
     return {
         type: actionTypes.CONNECT_FINISH
     }
-}
+};
 
 export const postData = (data, history) => {
     return dispatch => {
@@ -35,25 +35,23 @@ export const postData = (data, history) => {
         })
 
     }
-}
+};
 
 export const addData = (data) => {
     return {
         type: actionTypes.ADD_DATA,
         data: data
     }
-}
+};
 
 export const fetchData = (type) => {
     return dispatch => {
         dispatch(connectStart());
         let url = 'http://localhost:5000/services';
         if (type && type !== 'all') url = 'http://localhost:5000/services?active=' + type;
-        console.log(url);
 
         axios.get(url)
         .then(res => {
-            console.log(res.data)
             dispatch(connectFinish());
             dispatch(addData(res.data))        
         })
@@ -61,4 +59,28 @@ export const fetchData = (type) => {
             dispatch(connectFinish())
         })
     }
+};
+
+const editForm = (data) => {
+    return {
+        type: actionTypes.EDIT_FORM,
+        data: data
+    }
 }
+
+export const editData = (id, history) => {
+    return dispatch => {
+        dispatch(connectStart())
+
+        axios.get('http://localhost:5000/edit?id=' + id)
+            .then(res => {
+                console.log(res.data)
+                dispatch(editForm(res.data));
+                dispatch(connectFinish());
+                history.replace('/addnew')
+            })
+            .catch(err => {
+                dispatch(connectFinish());
+            })
+    }
+};

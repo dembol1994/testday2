@@ -4,6 +4,7 @@
 }
 
 .el {
+    position: relative;
     background-color: white;
     height: 250px;
     width: 400px;
@@ -11,6 +12,19 @@
     margin: 20px 20px;
     border: outset; 
     display: flex;
+}
+
+.el:hover {
+    cursor: pointer;
+}
+
+.el:hover::after {
+    content: 'Click to edit';
+    position: absolute;
+    background-color: #1f71e2;
+    color: white;
+    padding: 5px;
+    top: -10px;
 }
 
 .blocks {
@@ -27,6 +41,10 @@
     display: block;
     margin: 0 5px;
     width: 60%;  
+}
+
+.inactive {
+    color: red;
 }
 
 .TextDiv h3 {

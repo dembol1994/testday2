@@ -2,3 +2,4 @@ export const CHANGE_ACTIVE_BUTTON = 'CHANGE_ACTIVE_BUTTON';
 export const CONNECT_START = 'CONNECT_START';
 export const CONNECT_FINISH = 'CONNECT_FINISH';
 export const ADD_DATA = 'ADD_DATA';
+export const EDIT_FORM = 'EDIT_FORM';

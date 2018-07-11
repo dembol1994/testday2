@@ -3,7 +3,8 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     activeButton: 'all',
     loading: false,
-    services: []
+    services: [],
+    editForm: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -27,6 +28,11 @@ const reducer = (state = initialState, action) => {
         return {
             ...state,
             services: action.data
+        }
+        case actionTypes.EDIT_FORM:
+        return {
+            ...state,
+            editForm: action.data
         }
         default: return state
     }

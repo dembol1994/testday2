@@ -64,12 +64,18 @@ app.get('/services', (req, res) => {
     if (!req.query.active) {
         res.send(services)
     }   else {
-            let data = [];
-            services.forEach(el => {
-                if (req.query.active === el.isActive) data.push(el)
+            let data = services.filter(el => {
+                return el.isActive === req.query.active
             })
             res.send(data)
     }
+})
+
+app.get('/edit', (req, res) => {
+    let data = services.filter(el => {
+        return el.id == req.query.id 
+    })
+    res.send(data);
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

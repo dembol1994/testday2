@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import classes from './AddNew.css';
+import classes from './Form.css';
 
 import validator from 'validator';
 import {connect} from 'react-redux'
@@ -9,7 +9,7 @@ import Input from '../../components/UI/Input/Input';
 
 import * as actions from '../../store/actions/actions';
 
-class AddNew extends Component {
+class Form extends Component {
 
     state = {
         formField: {
@@ -123,8 +123,6 @@ class AddNew extends Component {
             isValid = value >= rules.minValue && isValid;
         }
         if (rules.hasOwnProperty('isNum')) {
-            console.log(value);
-            console.log(validator.isDecimal(value))
             isValid = validator.isDivisibleBy(value, 1) && isValid;
         }
 
@@ -159,6 +157,7 @@ class AddNew extends Component {
     }
 
     render() {
+        console.log(this.props.editData)
         return(
             <div className={classes.content}>
                 <Toolbar/>
@@ -268,4 +267,10 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(AddNew);
+const mapStateToProps = state => {
+    return {
+        editData: state.editForm
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);
