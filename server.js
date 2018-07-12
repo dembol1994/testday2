@@ -76,7 +76,7 @@ app.get('/edit', (req, res) => {
     let data = services.filter(el => {
         return el.id == req.query.id 
     })
-    res.send(data);
+    res.send(data[0]);
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

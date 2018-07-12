@@ -156,8 +156,25 @@ class Form extends Component {
         this.refs[id].onClick();
     }
 
+    componentDidMount() {
+        if(this.props.editData) {
+            let editForm = {...this.state.formField};
+            console.log(editForm);
+            console.log(this.props.editData.body)
+            let {body} = this.props.editData
+            for (let key in body) {
+                editForm[key] = {
+                    ...editForm[key],
+                    value: body[key]
+                }
+            }
+            this.setState({formField: editForm, isValid: true})
+        }
+        
+    }
+
     render() {
-        console.log(this.props.editData)
+
         return(
             <div className={classes.content}>
                 <Toolbar/>
