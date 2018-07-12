@@ -52,11 +52,20 @@ let services = [
     ];
 
 app.post('/services', (req, res) => {
-    services.push({
-        id: services.length + 1,
-        body: req.body,
-        isActive: 'active'
-    })
+    if (!req.query.id) {
+        services.push({
+            id: services.length + 1,
+            body: req.body,
+            isActive: 'active'
+        })
+    } else {
+        services[req.query.id - 1] = {
+            id: req.query.id,
+            body: req.body,
+            isActive: req.query.active === true ? "active" : "inactive"
+        }
+    }
+    
     res.send()
 })
 

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import classes from './ToolbarAddNew.css';
+import classes from './ToolbarForm.css';
 
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -9,7 +9,7 @@ import * as action from '../../../store/actions/actions';
 class Toolbar extends Component {
    
     onClickHandler = () => {
-        //klikniecie w powrot do service overview spowoduje wyczyszczenie danych z editForm 
+        //cleaning data in editForm
         this.props.onClick();
         this.props.history.replace('/')
     }

@@ -4,7 +4,7 @@ import classes from './Form.css';
 import validator from 'validator';
 import {connect} from 'react-redux'
 
-import Toolbar from '../../components/Layout/ToolbarAddNew/ToolbarAddNew';
+import ToolbarForm from '../../components/Layout/ToolbarForm/ToolbarForm';
 import Input from '../../components/UI/Input/Input';
 
 import * as actions from '../../store/actions/actions';
@@ -77,26 +77,18 @@ class Form extends Component {
                 label: 'BLUE ICON',
                 type: 'file',
                 value: 'icon1',
-                validation: {
-                    isReq: true
-                }
             },
             blueIcon: {
                 label: 'BLUE ICON',
                 type: 'file',
                 value: 'icon2',
-                validation: {
-                    isReq: true
-                }
             },
             usersImage: {
                 type: 'file',
                 value: 'icon3',
-                validation: {
-                    isReq: true
-                }
             }
         },
+        isServiceActive: true,
         formIsValid: false 
     }
 
@@ -105,11 +97,24 @@ class Form extends Component {
         for(let key in this.state.formField) {
             data[key] = this.state.formField[key].value
         }
-        this.props.postData(data, this.props.history);
+
+        let id;
+        this.props.editData ? id = this.props.editData.id : id = null;
+        this.props.postData(data, this.props.history, id, this.state.isServiceActive);
     };
 
     onCancelHandler = () => {
-        this.props.history.replace('/')
+        //set all value in form to empty string
+        let newForm = {...this.state.formField}
+        for (let key in newForm) {
+            newForm[key] = {
+                ...newForm[key],
+                value: '',
+                touched: false,
+                valid: false
+            }
+        }
+        this.setState({formField: newForm})
     };
 
     onValidHandler = (value, rules) => {
@@ -149,7 +154,7 @@ class Form extends Component {
 
         updState[id] = updForm;
 
-        this.setState({formField: updState, isFormValid: this.isFormValid(updState)})
+        this.setState({formField: updState, formIsValid: this.isFormValid(updState)})
     };
 
     onUploadIconHandler = (id) => {
@@ -159,28 +164,45 @@ class Form extends Component {
     componentDidMount() {
         if(this.props.editData) {
             let editForm = {...this.state.formField};
-            console.log(editForm);
-            console.log(this.props.editData.body)
             let {body} = this.props.editData
             for (let key in body) {
                 editForm[key] = {
                     ...editForm[key],
-                    value: body[key]
+                    value: body[key],
+                    valid: true
                 }
             }
-            this.setState({formField: editForm, isValid: true})
+            this.setState({formField: editForm, formIsValid: true, isServiceActive: this.props.editData.isActive == 'active'})
         }
-        
+    }
+
+    onChangeCheckbox = () => {
+        this.setState({isServiceActive: !this.state.isServiceActive})
     }
 
     render() {
-
+        // conditionaly change text and add checkbox
+        let formTitle = 'Add New Service';
+        let checkboxDiv = null;
+        if (this.props.editData) {
+            formTitle = 'Edit Your Service';
+            checkboxDiv = (
+                    <div>
+                            <input 
+                                type="checkbox"
+                                checked={this.state.isServiceActive}
+                                onChange={this.onChangeCheckbox}/>
+                            <span>ACTIVE</span>
+                    </div>)
+        }
+       
+        
         return(
             <div className={classes.content}>
-                <Toolbar/>
+                <ToolbarForm/>
                 <div className={classes.wrapper}>
                     <div className={classes.topDiv}>
-                        <div className={classes.addText}>Add New Service</div>
+                        <div className={classes.addText}>{formTitle}</div>
                         <div className={classes.requireText}>all fields required</div>
                     </div>
                     <div className={classes.middleDiv}>
@@ -263,13 +285,13 @@ class Form extends Component {
                                         change={(e) => this.onChangeHandler(e, 'usersImage') 
                                         }/> 
                                     <button   className={classes.uploadButton} onClick={() => this.onUploadIconHandler('usersImage')}>UPLOAD IMAGE</button>
-                                
+                                    {checkboxDiv}
                         </div>
                     </div>
                     <div className={classes.bottomDiv}>
                         <div>
                             <button onClick={this.onCancelHandler}  className={classes.Cancel}>CANCEL</button>
-                            <button onClick={this.onSaveHandler} disabled={!this.state.isFormValid} className={classes.Save}>SAVE</button>
+                            <button onClick={this.onSaveHandler} disabled={!this.state.formIsValid} className={classes.Save}>SAVE</button>
                         </div>
                     </div>
                 </div>
@@ -280,7 +302,7 @@ class Form extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        postData: (data, history) => dispatch(actions.postData(data, history))
+        postData: (data, history, id) => dispatch(actions.postData(data, history, id))
     }
 }
 

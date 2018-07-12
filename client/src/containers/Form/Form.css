@@ -104,6 +104,11 @@
     height: 200px;
 }
 
+.checkboxDiv label {
+    font-size: 14px;
+    color: blue;
+}
+
 .bottomDiv {
     height: 100px;
     width: 100%;

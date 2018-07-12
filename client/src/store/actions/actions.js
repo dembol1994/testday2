@@ -20,11 +20,16 @@ const connectFinish = () => {
     }
 };
 
-export const postData = (data, history) => {
+export const postData = (data, history, id, active) => {
     return dispatch => {
+
         dispatch(connectStart());
 
-        axios.post('http://localhost:5000/services', data )
+        //if id was passed it is add as a query params
+
+        let url = 'http://localhost:5000/services?active=active';
+        if (id) url += '?id=' + id;
+        axios.post(url, data)
         .then(res => {
             dispatch(changeActive('all'));
             dispatch(connectFinish());
