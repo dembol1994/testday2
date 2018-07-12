@@ -1,10 +1,11 @@
 .wrapper {
     background-color: white;
     height: 50px;
-    border-bottom: outset;  
     display: flex;
     font-size: 20px;
     position: relative;
+    box-sizing: border-box;
+    box-shadow: 0 4px rgb(0, 0, 0, 0.1)
 }
 
 
@@ -26,7 +27,7 @@
 }
 
 .newPage a {
-    color: #1f71e2;
+    color: rgb(120, 195, 252)
 }
 
 .navLinks {
@@ -43,5 +44,5 @@
 }
 
 .activeNavLink {
-    color: blue;
+    color: rgb(120, 195, 252)
 }

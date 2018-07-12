@@ -202,7 +202,7 @@ class Form extends Component {
         if (this.props.editData) {
             formTitle = 'Edit Your Service';
             checkboxDiv = (
-                    <div>
+                    <div className={classes.checkboxDiv}>
                         <input 
                             type="checkbox"
                             checked={this.state.isServiceActive}
@@ -247,7 +247,7 @@ class Form extends Component {
                         </div>
                         <div className={classes.middleFormDiv}>
                             <div className={classes.leftForm}>
-                                <div>WHITE ICON</div>
+                                <div className={classes.textAbove}>WHITE ICON</div>
                                 <button className={classes.uploadButton} onClick={() => this.onUploadIconHandler('whiteIconInput')}>UPLOAD ICON</button>
                                 <Input
                                     hidden={true}
@@ -265,7 +265,7 @@ class Form extends Component {
                                     change={(e) => this.onChangeHandler(e, 'minHours') }/>
                             </div>
                             <div className={classes.rightForm}>
-                                <div>BLUE ICON</div>
+                                <div className={classes.textAbove}>BLUE ICON</div>
                                 <Input
                                     hidden={true}
                                     type={this.state.formField.blueIcon.type}
@@ -291,12 +291,13 @@ class Form extends Component {
                                     label={this.state.formField.pricePerHour.label}
                                     type={this.state.formField.pricePerHour.type}
                                     value={this.state.formField.pricePerHour.value}
+                                    dollar
                                     change={(e) => this.onChangeHandler(e, 'pricePerHour') }/>
                                        
                         </div>
                         </div>
                         <div className={classes.imgDiv}>
-                                    <label>IMAGE</label>
+                                    <div className={classes.textAbove}>IMAGE</div>
                                     <div className={classes.img}></div>
                                     <Input
                                         hidden={true}

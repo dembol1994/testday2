@@ -1,5 +1,5 @@
 .content {
-    background-color: lightgray;
+    background-color: rgb(251,251,251);
     height: calc(100vh - 100px);
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@
 .addText {
     padding: 5px 0;
     font-size: 20px;
-    color: blue;
+    color: rgb(120, 195, 252);
 }
 
 .requireText {
@@ -61,7 +61,7 @@
     height: 30px;
     background-color: inherit;
     border: none;
-    color: blue;
+    color: rgb(120, 195, 252);
     padding: 0;
     font-size: 16px;
     cursor: pointer;
@@ -91,7 +91,7 @@
     margin: 10px 10px;
 }
 
-.imgDiv label {
+.textAbove {
     font-size: 10px;
 }
 
@@ -104,9 +104,9 @@
     height: 200px;
 }
 
-.checkboxDiv label {
+.checkboxDiv span {
     font-size: 14px;
-    color: blue;
+    color: rgb(120, 195, 252);
 }
 
 .bottomDiv {
@@ -143,9 +143,9 @@
 }
 
 .Delete {
-    background-color: red;
+    background-color: rgb(224, 110, 110);
     border-radius: 10px;
-    border-color: red;
+    border-color: rgb(224, 110, 110);
 }
 
 .bottomDiv div {
