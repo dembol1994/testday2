@@ -3,3 +3,4 @@ export const CONNECT_START = 'CONNECT_START';
 export const CONNECT_FINISH = 'CONNECT_FINISH';
 export const ADD_DATA = 'ADD_DATA';
 export const EDIT_FORM = 'EDIT_FORM';
+export const CLEAN_EDIT_DATA = 'CLEAN_EDIT_DATA';

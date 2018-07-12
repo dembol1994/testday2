@@ -1,14 +1,30 @@
-import React from 'react';
-import classes from './ToolbarAddNew.css'
+import React, {Component} from 'react';
+import classes from './ToolbarAddNew.css';
 
-import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
 
-const toolbar = (props) => {
-    return(
-        <div className={classes.wrapper}>
-            <div><Link to='/'>&lt; Back to the Services overview</Link></div>
-        </div>
-    )
-};
+import * as action from '../../../store/actions/actions';
 
-export default toolbar;
+class Toolbar extends Component {
+   
+    onClickHandler = () => {
+        //klikniecie w powrot do service overview spowoduje wyczyszczenie danych z editForm 
+        this.props.onClick();
+        this.props.history.replace('/')
+    }
+    
+    render() {
+        return (<div 
+            className={classes.wrapper}
+            onClick={this.onClickHandler}>&lt; Back to the Services overview</div>        )
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onClick: () => dispatch(action.cleanEditData())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(Toolbar));

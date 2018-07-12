@@ -3,13 +3,6 @@
     height: 50px;
     border-bottom: outset;  
     font-size: 20px;
-}
-
-.wrapper div {
-    padding: 15px;
-}
-
-.wrapper a {
-    text-decoration: none;
-    color: grey;
+    padding: 10px;
+    box-sizing: border-box;
 }

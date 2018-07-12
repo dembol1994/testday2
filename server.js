@@ -72,6 +72,7 @@ app.get('/services', (req, res) => {
 })
 
 app.get('/edit', (req, res) => {
+    console.log('work ' + req.query.id)
     let data = services.filter(el => {
         return el.id == req.query.id 
     })

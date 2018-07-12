@@ -34,6 +34,11 @@ const reducer = (state = initialState, action) => {
             ...state,
             editForm: action.data
         }
+        case actionTypes.CLEAN_EDIT_DATA:
+        return {
+            ...state,
+            editForm: null
+        }
         default: return state
     }
 }

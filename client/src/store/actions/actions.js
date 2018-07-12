@@ -84,3 +84,9 @@ export const editData = (id, history) => {
             })
     }
 };
+
+export const cleanEditData = () => {
+    return {
+        type: actionTypes.CLEAN_EDIT_DATA
+    }
+}
