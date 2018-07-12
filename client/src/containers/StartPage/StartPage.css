@@ -19,12 +19,15 @@
 }
 
 .el:hover::after {
-    content: 'Click to edit';
+    content: 'EDIT';
     position: absolute;
-    background-color: #1f71e2;
+    background-color: rgb(31, 113, 226, 0.6);
+    display: flex;
     color: white;
-    padding: 5px;
-    top: -10px;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 .blocks {
