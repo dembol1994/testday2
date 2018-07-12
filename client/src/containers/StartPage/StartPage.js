@@ -23,6 +23,7 @@ class StartPage extends Component {
             <ToolbarStart/>
             <div className={classes.blocks}>
                     {this.props.services.map(el => {
+                        if(!el) return null;
                         let inactiveClass;
                         el.isActive === 'inactive' ? inactiveClass = {color: 'red'} : null;
                         return (

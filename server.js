@@ -52,40 +52,49 @@ let services = [
     ];
 
 app.post('/services', (req, res) => {
-    if (!req.query.id) {
-        services.push({
-            id: services.length + 1,
-            body: req.body,
-            isActive: 'active'
-        })
-    } else {
-        services[req.query.id - 1] = {
-            id: req.query.id,
-            body: req.body,
-            isActive: req.query.active === true ? "active" : "inactive"
-        }
-    }
     
+    services.push({
+        id: services.length + 1,
+        body: req.body,
+        isActive: 'active'
+    })
     res.send()
+})
+
+app.put('/services', (req, res) => {
+    services[req.query.id - 1] = {
+        id: req.query.id,
+        body: req.body,
+        isActive: req.query.active === 'true' ? 'active' : 'inactive'}
+    res.send();
 })
 
 app.get('/services', (req, res) => {
     if (!req.query.active) {
         res.send(services)
     }   else {
-            let data = services.filter(el => {
-                return el.isActive === req.query.active
+            let data = [];
+            services.forEach(el => {
+                if (!el) return;
+                if (el.isActive === req.query.active) data.push(el)
             })
             res.send(data)
     }
 })
 
 app.get('/edit', (req, res) => {
-    console.log('work ' + req.query.id)
-    let data = services.filter(el => {
-        return el.id == req.query.id 
+    let data;
+    services.forEach(el => {
+        if (!el) return;
+        if (el.id == req.query.id) data = el;
     })
-    res.send(data[0]);
+    res.send(data);
+})
+
+app.delete('/services', (req, res) => {
+    services[req.query.id - 1] = undefined;
+    console.log(services)
+    res.send()
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

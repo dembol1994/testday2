@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios';
+import {instance} from '../../axios/axios';
 
 export const changeActive = (id) => {
     return {
@@ -20,16 +20,12 @@ const connectFinish = () => {
     }
 };
 
-export const postData = (data, history, id, active) => {
+export const postData = (data, history) => {
     return dispatch => {
 
         dispatch(connectStart());
-
-        //if id was passed it is add as a query params
-
-        let url = 'http://localhost:5000/services?active=active';
-        if (id) url += '?id=' + id;
-        axios.post(url, data)
+       
+        instance.post('services', data)
         .then(res => {
             dispatch(changeActive('all'));
             dispatch(connectFinish());
@@ -42,6 +38,23 @@ export const postData = (data, history, id, active) => {
     }
 };
 
+export const putData = (data, history, id, active) => {
+    return dispatch => {
+        dispatch(connectStart());
+    
+        instance.put('services?active=' + active +'&id=' + id, data)
+        .then(res => {
+            dispatch(changeActive('all'));
+            dispatch(cleanEditData())
+            dispatch(connectFinish());
+            history.replace('/')
+        })
+        .catch(err => {
+            dispatch(connectFinish());
+        })
+    }
+}
+
 export const addData = (data) => {
     return {
         type: actionTypes.ADD_DATA,
@@ -52,10 +65,10 @@ export const addData = (data) => {
 export const fetchData = (type) => {
     return dispatch => {
         dispatch(connectStart());
-        let url = 'http://localhost:5000/services';
-        if (type && type !== 'all') url = 'http://localhost:5000/services?active=' + type;
+        let url = 'services';
+        if (type && type !== 'all') url = 'services?active=' + type;
 
-        axios.get(url)
+        instance.get(url)
         .then(res => {
             dispatch(connectFinish());
             dispatch(addData(res.data))        
@@ -77,7 +90,7 @@ export const editData = (id, history) => {
     return dispatch => {
         dispatch(connectStart())
 
-        axios.get('http://localhost:5000/edit?id=' + id)
+        instance.get('edit?id=' + id)
             .then(res => {
                 console.log(res.data)
                 dispatch(editForm(res.data));
@@ -93,5 +106,21 @@ export const editData = (id, history) => {
 export const cleanEditData = () => {
     return {
         type: actionTypes.CLEAN_EDIT_DATA
+    }
+}
+
+export const deleteData = (id, history) => {
+    return dispatch => {
+        dispatch(connectStart())
+        instance.delete('services?id=' + id)
+            .then(res => {
+                dispatch(connectFinish())
+                dispatch(cleanEditData())
+                history.replace('/')
+            })
+            .catch(err => {
+                dispatch(connectFinish())
+            })
+
     }
 }

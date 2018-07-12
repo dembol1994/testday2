@@ -37,7 +37,7 @@ class Form extends Component {
             },
             minHours: {
                 label: 'MINIMUM HOURS',
-                placeholder: 'Enter Subtitle',
+                placeholder: 'Enter Min Hours',
                 type: 'number',
                 value: '',validation: {
                     isReq: true,
@@ -49,7 +49,7 @@ class Form extends Component {
             },
             maxHours: {
                 label: 'MAXIMUM HOURS',
-                placeholder: 'Enter Subtitle',
+                placeholder: 'Enter Max Hours',
                 type: 'number',
                 value: '',
                 validation: {
@@ -92,15 +92,38 @@ class Form extends Component {
         formIsValid: false 
     }
 
+    componentDidMount() {
+        if(this.props.editData) {
+            let newState = {...this.state}
+            let editForm = {...newState.formField};
+            let {body} = this.props.editData
+            for (let key in body) {
+                editForm[key] = {
+                    ...editForm[key],
+                    value: body[key],
+                    valid: true
+                }
+            }
+            newState = {
+                formIsValid: true,
+                isServiceActive: this.props.editData.isActive === 'active',
+                formField: editForm
+            }
+            this.setState(newState)
+        }
+    }
+
     onSaveHandler = () => {
         let data = {};
         for(let key in this.state.formField) {
             data[key] = this.state.formField[key].value
         }
 
-        let id;
-        this.props.editData ? id = this.props.editData.id : id = null;
-        this.props.postData(data, this.props.history, id, this.state.isServiceActive);
+        if (!this.props.editData) {
+            this.props.postData(data, this.props.history)
+        }   else {
+            this.props.putData(data, this.props.history, this.props.editData.id, this.state.isServiceActive);
+        }
     };
 
     onCancelHandler = () => {
@@ -114,7 +137,7 @@ class Form extends Component {
                 valid: false
             }
         }
-        this.setState({formField: newForm})
+        this.setState({formField: newForm, formIsValid: false})
     };
 
     onValidHandler = (value, rules) => {
@@ -161,39 +184,36 @@ class Form extends Component {
         this.refs[id].onClick();
     }
 
-    componentDidMount() {
-        if(this.props.editData) {
-            let editForm = {...this.state.formField};
-            let {body} = this.props.editData
-            for (let key in body) {
-                editForm[key] = {
-                    ...editForm[key],
-                    value: body[key],
-                    valid: true
-                }
-            }
-            this.setState({formField: editForm, formIsValid: true, isServiceActive: this.props.editData.isActive == 'active'})
-        }
+    onChangeCheckbox = () => {
+        this.setState((prevState => {
+            return {isServiceActive: !prevState.isServiceActive}
+        }))
     }
 
-    onChangeCheckbox = () => {
-        this.setState({isServiceActive: !this.state.isServiceActive})
+    onDeleteHandler = () => {
+        this.props.deleteData(this.props.editData.id, this.props.history)
     }
 
     render() {
         // conditionaly change text and add checkbox
         let formTitle = 'Add New Service';
         let checkboxDiv = null;
+        let deleteButton = null;
         if (this.props.editData) {
             formTitle = 'Edit Your Service';
             checkboxDiv = (
                     <div>
-                            <input 
-                                type="checkbox"
-                                checked={this.state.isServiceActive}
-                                onChange={this.onChangeCheckbox}/>
-                            <span>ACTIVE</span>
+                        <input 
+                            type="checkbox"
+                            checked={this.state.isServiceActive}
+                            onChange={this.onChangeCheckbox}/>
+                        <span>ACTIVE</span>
                     </div>)
+            deleteButton = (
+                    <button 
+                        onClick={this.onDeleteHandler}  
+                        className={classes.Delete}>DELETE</button>
+                    )
         }
        
         
@@ -291,6 +311,7 @@ class Form extends Component {
                     <div className={classes.bottomDiv}>
                         <div>
                             <button onClick={this.onCancelHandler}  className={classes.Cancel}>CANCEL</button>
+                            {deleteButton}
                             <button onClick={this.onSaveHandler} disabled={!this.state.formIsValid} className={classes.Save}>SAVE</button>
                         </div>
                     </div>
@@ -302,7 +323,9 @@ class Form extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        postData: (data, history, id) => dispatch(actions.postData(data, history, id))
+        postData: (data, history) => dispatch(actions.postData(data, history)),
+        putData: (data, history, id, active) => dispatch(actions.putData(data, history, id, active)),
+        deleteData: (id, history) => dispatch(actions.deleteData(id, history))
     }
 }
 
