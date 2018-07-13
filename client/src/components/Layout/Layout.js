@@ -3,8 +3,10 @@ import Toolbar from './Toolbar/Toolbar';
 import Sidebar from './Sidebar/Sidebar';
 import classes from './Layout.css';
 import {Route, Switch} from 'react-router-dom';
-import StartPage from '../../containers/StartPage/StartPage';
+import Services from '../../containers/Services/Services';
 import Form from '../../containers/Form/Form';
+import DefaultPage from '../../components/DefaultPage/DefaultPage';
+
 
 const layout = () => {
     return(
@@ -14,8 +16,10 @@ const layout = () => {
         <Sidebar/>
         <div className={classes.Sth}>
             <Switch>
-                <Route path='/' exact component={StartPage}/>
-                <Route path='/addnew' component={Form}/>
+                <Route path='/' exact component={DefaultPage}/>
+                <Route path='/services/addnew' component={Form}/>
+                <Route path='/services/edit/:id' component={Form}/>
+                <Route path='/services' component={Services}/>
             </Switch>
         </div>
         </div>

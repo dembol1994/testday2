@@ -11,7 +11,7 @@ class Toolbar extends Component {
     onClickHandler = () => {
         //cleaning data in editForm
         this.props.onClick();
-        this.props.history.replace('/')
+        this.props.history.replace('/services')
     }
     
     render() {

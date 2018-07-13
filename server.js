@@ -71,14 +71,14 @@ app.put('/services', (req, res) => {
 
 app.get('/services', (req, res) => {
     if (!req.query.active) {
-        res.send(services)
+        setTimeout(() => res.send(services), 1000)
     }   else {
             let data = [];
             services.forEach(el => {
                 if (!el) return;
                 if (el.isActive === req.query.active) data.push(el)
             })
-            res.send(data)
+            setTimeout(() => res.send(data), 1000)
     }
 })
 
@@ -93,7 +93,6 @@ app.get('/edit', (req, res) => {
 
 app.delete('/services', (req, res) => {
     services[req.query.id - 1] = undefined;
-    console.log(services)
     res.send()
 })
 

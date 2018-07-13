@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import classes from './ToolbarStartPage.css';
+import classes from './ToolbarServices.css';
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 
@@ -30,6 +30,7 @@ class Toolbar extends Component {
     };
 
     render() {
+        console.log(this.props.location)
         return (
         <div className={classes.wrapper}>
             <div className={classes.navLinks}>
@@ -42,7 +43,7 @@ class Toolbar extends Component {
                             className={cssClass}>{el.text}</div>
                 })}
                 </div>
-            <div className={classes.newPage}><Link to='/addnew'>ADD NEW SERVICE</Link></div>
+            <div className={classes.newPage}><Link to='/services/addnew'>ADD NEW SERVICE</Link></div>
         </div>
         )
     }

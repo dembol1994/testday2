@@ -1,19 +1,35 @@
 import React from 'react';
 import classes from './Sidebar.css';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 const sidebar = (props) => {
 
-    let onClickHandler = (e) => {
-        console.log(e.target.innerHTML);
-    };
-
-    const arr = ['Bookings', 'Specialist', 'Users', 'Locations', 'Services']
+    const arr = [
+        {
+            text:'Bookings',
+            to: '/'
+        }, 
+        {
+            text: 'Specialist',
+            to: '/'
+        }, 
+        {
+            text: 'Users',
+            to: '/'
+        }, 
+        {
+            text: 'Locations',
+            to: '/'
+        }, 
+        {
+            text: 'Services',
+            to: '/services'
+        }]
     return (
             <div className={classes.wrapper}>
                 <nav>
                     {arr.map(el => {
-                        return <div key={el}  className={classes.NavLink}><Link onClick={onClickHandler} to='/'>{el}</Link></div>
+                        return <div key={el.text} className={classes.NavLink}><NavLink exact activeStyle={{color: 'white'}} to={el.to}>{el.text}</NavLink></div>
                     })}
                 </nav>
             </div>

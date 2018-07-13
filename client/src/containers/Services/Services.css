@@ -84,5 +84,12 @@
     font-weight: bold;
 }
 
+.spinner {
+    background-color: rgb(251,251,251);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+}
 
 

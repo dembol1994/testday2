@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    min-height: calc(100vh - 100px);
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper div {
+    background: url('../../img/4.jpg');
+    height: 500px;
+    width: 500px;
+    background-size: cover;
+    background-position: center;
+}

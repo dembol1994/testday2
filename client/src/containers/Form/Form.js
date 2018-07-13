@@ -89,11 +89,20 @@ class Form extends Component {
             }
         },
         isServiceActive: true,
-        formIsValid: false 
+        formIsValid: false,
+        inEditMode: false
     }
 
     componentDidMount() {
-        if(this.props.editData) {
+        console.log(this.props.match.params.id)
+        if (this.props.match.params.id) {
+            this.props.editDataFunc(this.props.match.params.id);
+            this.setState({inEditMode: true})
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.state.inEditMode && this.props.editData) {
             let newState = {...this.state}
             let editForm = {...newState.formField};
             let {body} = this.props.editData
@@ -107,7 +116,8 @@ class Form extends Component {
             newState = {
                 formIsValid: true,
                 isServiceActive: this.props.editData.isActive === 'active',
-                formField: editForm
+                formField: editForm,
+                inEditMode: false
             }
             this.setState(newState)
         }
@@ -143,6 +153,8 @@ class Form extends Component {
     onValidHandler = (value, rules) => {
         let isValid = true;
 
+        if (!rules) return isValid;
+
         if (rules.hasOwnProperty('isReq')) {
             isValid = !validator.isEmpty(value) && isValid;
         }
@@ -176,6 +188,8 @@ class Form extends Component {
         updForm.valid = this.onValidHandler(e.target.value, this.state.formField[id].validation);
 
         updState[id] = updForm;
+
+        console.log(updForm)
 
         this.setState({formField: updState, formIsValid: this.isFormValid(updState)})
     };
@@ -327,7 +341,8 @@ const mapDispatchToProps = dispatch => {
     return {
         postData: (data, history) => dispatch(actions.postData(data, history)),
         putData: (data, history, id, active) => dispatch(actions.putData(data, history, id, active)),
-        deleteData: (id, history) => dispatch(actions.deleteData(id, history))
+        deleteData: (id, history) => dispatch(actions.deleteData(id, history)),
+        editDataFunc: (id) => dispatch(actions.editData(id))
     }
 }
 

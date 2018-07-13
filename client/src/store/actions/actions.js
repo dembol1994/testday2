@@ -29,7 +29,7 @@ export const postData = (data, history) => {
         .then(res => {
             dispatch(changeActive('all'));
             dispatch(connectFinish());
-            history.replace('/')
+            history.replace('/services')
         })
         .catch(err => {
             dispatch(connectFinish());
@@ -47,7 +47,7 @@ export const putData = (data, history, id, active) => {
             dispatch(changeActive('all'));
             dispatch(cleanEditData())
             dispatch(connectFinish());
-            history.replace('/')
+            history.replace('/services')
         })
         .catch(err => {
             dispatch(connectFinish());
@@ -86,16 +86,15 @@ const editForm = (data) => {
     }
 }
 
-export const editData = (id, history) => {
+export const editData = (id) => {
     return dispatch => {
         dispatch(connectStart())
 
         instance.get('edit?id=' + id)
             .then(res => {
-                console.log(res.data)
                 dispatch(editForm(res.data));
                 dispatch(connectFinish());
-                history.replace('/addnew')
+                console.log('edit Data run')
             })
             .catch(err => {
                 dispatch(connectFinish());
@@ -116,7 +115,7 @@ export const deleteData = (id, history) => {
             .then(res => {
                 dispatch(connectFinish())
                 dispatch(cleanEditData())
-                history.replace('/')
+                history.replace('/services')
             })
             .catch(err => {
                 dispatch(connectFinish())
