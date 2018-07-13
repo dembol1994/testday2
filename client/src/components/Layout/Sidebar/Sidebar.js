@@ -10,11 +10,13 @@ const sidebar = (props) => {
 
     const arr = ['Bookings', 'Specialist', 'Users', 'Locations', 'Services']
     return (
-        <div className={classes.wrapper}>
-            {arr.map(el => {
-                return <div key={el}  className={classes.NavLink}><Link onClick={onClickHandler} to='/'>{el}</Link></div>
-            })}
-        </div>
+            <div className={classes.wrapper}>
+                <nav>
+                    {arr.map(el => {
+                        return <div key={el}  className={classes.NavLink}><Link onClick={onClickHandler} to='/'>{el}</Link></div>
+                    })}
+                </nav>
+            </div>
     )
 };
 

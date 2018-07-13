@@ -74,7 +74,7 @@ class Form extends Component {
                 valid: false
             },
             whiteIcon: {
-                label: 'BLUE ICON',
+                label: 'WHITE ICON',
                 type: 'file',
                 value: 'icon1',
             },
@@ -202,13 +202,14 @@ class Form extends Component {
         if (this.props.editData) {
             formTitle = 'Edit Your Service';
             checkboxDiv = (
-                    <div className={classes.checkboxDiv}>
+                    <label className={classes.checkboxDiv}>
+                        <span>ACTIVE</span>
                         <input 
                             type="checkbox"
                             checked={this.state.isServiceActive}
                             onChange={this.onChangeCheckbox}/>
-                        <span>ACTIVE</span>
-                    </div>)
+                        <span className={classes.checkmark}></span>
+                    </label>)
             deleteButton = (
                     <button 
                         onClick={this.onDeleteHandler}  
@@ -225,97 +226,97 @@ class Form extends Component {
                         <div className={classes.addText}>{formTitle}</div>
                         <div className={classes.requireText}>all fields required</div>
                     </div>
-                    <div className={classes.middleDiv}>
-                        <div className={classes.formDiv}>
-                        <div className={classes.topFormDiv}>
-                            <Input
-                            touched={this.state.formField.name.touched} 
-                            valid={this.state.formField.name.valid}
-                            placeholder={this.state.formField.name.placeholder}
-                            label={this.state.formField.name.label}
-                            type={this.state.formField.name.type}
-                            value={this.state.formField.name.value}
-                            change={(e) => this.onChangeHandler(e, 'name') }/>
-                            <Input
-                            touched={this.state.formField.subtitle.touched} 
-                            valid={this.state.formField.subtitle.valid} 
-                            placeholder={this.state.formField.subtitle.placeholder}
-                            label={this.state.formField.subtitle.label}
-                            type={this.state.formField.subtitle.type}
-                            value={this.state.formField.subtitle.value}
-                            change={(e) => this.onChangeHandler(e, 'subtitle') }/>
-                        </div>
-                        <div className={classes.middleFormDiv}>
-                            <div className={classes.leftForm}>
-                                <div className={classes.textAbove}>WHITE ICON</div>
-                                <button className={classes.uploadButton} onClick={() => this.onUploadIconHandler('whiteIconInput')}>UPLOAD ICON</button>
+                        <div className={classes.middleDiv}>
+                            <div className={classes.formDiv}>
+                            <div className={classes.topFormDiv}>
                                 <Input
-                                    hidden={true}
-                                    type={this.state.formField.whiteIcon.type}
-                                    ref='whiteIconInput'
-                                    change={(e) => this.onChangeHandler(e, 'whiteIcon') 
-                                    }/>
-                                <Input 
-                                    touched={this.state.formField.minHours.touched} 
-                                    valid={this.state.formField.minHours.valid}
-                                    placeholder={this.state.formField.minHours.placeholder}
-                                    label={this.state.formField.minHours.label}
-                                    type={this.state.formField.minHours.type}
-                                    value={this.state.formField.minHours.value}
-                                    change={(e) => this.onChangeHandler(e, 'minHours') }/>
+                                touched={this.state.formField.name.touched} 
+                                valid={this.state.formField.name.valid}
+                                placeholder={this.state.formField.name.placeholder}
+                                label={this.state.formField.name.label}
+                                type={this.state.formField.name.type}
+                                value={this.state.formField.name.value}
+                                change={(e) => this.onChangeHandler(e, 'name') }/>
+                                <Input
+                                touched={this.state.formField.subtitle.touched} 
+                                valid={this.state.formField.subtitle.valid} 
+                                placeholder={this.state.formField.subtitle.placeholder}
+                                label={this.state.formField.subtitle.label}
+                                type={this.state.formField.subtitle.type}
+                                value={this.state.formField.subtitle.value}
+                                change={(e) => this.onChangeHandler(e, 'subtitle') }/>
                             </div>
-                            <div className={classes.rightForm}>
-                                <div className={classes.textAbove}>BLUE ICON</div>
-                                <Input
-                                    hidden={true}
-                                    type={this.state.formField.blueIcon.type}
-                                    ref='blueIconInput'
-                                    change={(e) => this.onChangeHandler(e, 'BlueIcon') 
-                                    }/> 
-                                <button  className={classes.uploadButton} onClick={() => this.onUploadIconHandler('blueIconInput')}>UPLOAD ICON</button>
-                                <Input
-                                    touched={this.state.formField.maxHours.touched} 
-                                    valid={this.state.formField.maxHours.valid}                         
-                                    placeholder={this.state.formField.maxHours.placeholder}
-                                    label={this.state.formField.maxHours.label}
-                                    type={this.state.formField.maxHours.type}
-                                    value={this.state.formField.maxHours.value}
-                                    change={(e) => this.onChangeHandler(e, 'maxHours') }/>
-                            </div>
-                        </div>
-                        <div className={classes.leftForm}>
-                                <Input 
-                                    touched={this.state.formField.pricePerHour.touched} 
-                                    valid={this.state.formField.pricePerHour.valid}              
-                                    placeholder={this.state.formField.pricePerHour.placeholder}
-                                    label={this.state.formField.pricePerHour.label}
-                                    type={this.state.formField.pricePerHour.type}
-                                    value={this.state.formField.pricePerHour.value}
-                                    dollar
-                                    change={(e) => this.onChangeHandler(e, 'pricePerHour') }/>
-                                       
-                        </div>
-                        </div>
-                        <div className={classes.imgDiv}>
-                                    <div className={classes.textAbove}>IMAGE</div>
-                                    <div className={classes.img}></div>
+                            <div className={classes.middleFormDiv}>
+                                <div className={classes.leftForm}>
+                                    <div className={classes.textAbove}>WHITE ICON</div>
+                                    <button className={classes.uploadButton} onClick={() => this.onUploadIconHandler('whiteIconInput')}>UPLOAD ICON</button>
                                     <Input
                                         hidden={true}
-                                        type={this.state.formField.usersImage.type}
-                                        ref='usersImage'
-                                        change={(e) => this.onChangeHandler(e, 'usersImage') 
+                                        type={this.state.formField.whiteIcon.type}
+                                        ref='whiteIconInput'
+                                        change={(e) => this.onChangeHandler(e, 'whiteIcon') 
+                                        }/>
+                                    <Input 
+                                        touched={this.state.formField.minHours.touched} 
+                                        valid={this.state.formField.minHours.valid}
+                                        placeholder={this.state.formField.minHours.placeholder}
+                                        label={this.state.formField.minHours.label}
+                                        type={this.state.formField.minHours.type}
+                                        value={this.state.formField.minHours.value}
+                                        change={(e) => this.onChangeHandler(e, 'minHours') }/>
+                                </div>
+                                <div className={classes.rightForm}>
+                                    <div className={classes.textAbove}>BLUE ICON</div>
+                                    <Input
+                                        hidden={true}
+                                        type={this.state.formField.blueIcon.type}
+                                        ref='blueIconInput'
+                                        change={(e) => this.onChangeHandler(e, 'BlueIcon') 
                                         }/> 
-                                    <button   className={classes.uploadButton} onClick={() => this.onUploadIconHandler('usersImage')}>UPLOAD IMAGE</button>
-                                    {checkboxDiv}
+                                    <button  className={classes.uploadButton} onClick={() => this.onUploadIconHandler('blueIconInput')}>UPLOAD ICON</button>
+                                    <Input
+                                        touched={this.state.formField.maxHours.touched} 
+                                        valid={this.state.formField.maxHours.valid}                         
+                                        placeholder={this.state.formField.maxHours.placeholder}
+                                        label={this.state.formField.maxHours.label}
+                                        type={this.state.formField.maxHours.type}
+                                        value={this.state.formField.maxHours.value}
+                                        change={(e) => this.onChangeHandler(e, 'maxHours') }/>
+                                </div>
+                            </div>
+                            <div className={classes.leftForm}>
+                                    <Input 
+                                        touched={this.state.formField.pricePerHour.touched} 
+                                        valid={this.state.formField.pricePerHour.valid}              
+                                        placeholder={this.state.formField.pricePerHour.placeholder}
+                                        label={this.state.formField.pricePerHour.label}
+                                        type={this.state.formField.pricePerHour.type}
+                                        value={this.state.formField.pricePerHour.value}
+                                        dollar
+                                        change={(e) => this.onChangeHandler(e, 'pricePerHour') }/>
+                                        
+                            </div>
+                            </div>
+                            <div className={classes.imgDiv}>
+                                        <div className={classes.textAbove}>IMAGE</div>
+                                        <div className={classes.img}></div>
+                                        <Input
+                                            hidden={true}
+                                            type={this.state.formField.usersImage.type}
+                                            ref='usersImage'
+                                            change={(e) => this.onChangeHandler(e, 'usersImage') 
+                                            }/> 
+                                        <button   className={classes.uploadButton} onClick={() => this.onUploadIconHandler('usersImage')}>UPLOAD IMAGE</button>
+                                        {checkboxDiv}
+                            </div>
                         </div>
-                    </div>
-                    <div className={classes.bottomDiv}>
-                        <div>
-                            <button onClick={this.onCancelHandler}  className={classes.Cancel}>CANCEL</button>
-                            {deleteButton}
-                            <button onClick={this.onSaveHandler} disabled={!this.state.formIsValid} className={classes.Save}>SAVE</button>
+                        <div className={classes.bottomDiv}>
+                            <div>
+                                <button onClick={this.onCancelHandler}  className={classes.Cancel}>CANCEL</button>
+                                {deleteButton}
+                                <button onClick={this.onSaveHandler} disabled={!this.state.formIsValid} className={classes.Save}>SAVE</button>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
         )
