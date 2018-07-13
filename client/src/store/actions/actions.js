@@ -90,11 +90,10 @@ export const editData = (id) => {
     return dispatch => {
         dispatch(connectStart())
 
-        instance.get('edit?id=' + id)
+        instance.get('services/edit?id=' + id)
             .then(res => {
                 dispatch(editForm(res.data));
                 dispatch(connectFinish());
-                console.log('edit Data run')
             })
             .catch(err => {
                 dispatch(connectFinish());

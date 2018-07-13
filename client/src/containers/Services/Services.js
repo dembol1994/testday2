@@ -7,6 +7,7 @@ import * as action from '../../store/actions/actions';
 
 import ToolbarStart from '../../components/Layout/ToolbarServices/ToolbarServices';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import Service from '../../components/Service/Service';
 
 class StartPage extends Component {
        
@@ -15,6 +16,7 @@ class StartPage extends Component {
         }
 
         onClickHandler(id) {
+            console.log(this.props)
             this.props.history.replace(this.props.location.pathname + '/edit/' + id)
         }
 
@@ -27,24 +29,13 @@ class StartPage extends Component {
                 <div className={classes.blocks}>
                 {this.props.services.map(el => {
                     if(!el) return null;
-                    let inactiveDiv = null;
-                    if(el.isActive === 'inactive') {
-                        inactiveDiv = <div className={classes.inactive}><div>INACTIVE</div></div>
-                    }
-                    return (
-                        <div onClick={() => this.onClickHandler(el.id)} key={el.id} className={classes.el}> 
-                            <div className={classes.TextDiv}>
-                                <h3>{el.body.name}</h3>
-                                <span>{el.body.subtitle}</span>
-                                <span>Max Hours: {el.body.maxHours}</span>
-                                <span>Min Hours: {el.body.minHours}</span>
-                                <span>Price Per Hour: {el.body.pricePerHour}</span>
-                            </div>
-                            <div className={classes.ImgDiv}>
-                                {inactiveDiv}
-                            </div>
-                        </div>
-                    )
+                    return <Service
+                                id={el.id}
+                                key={el.id}
+                                subtitle={el.body.subtitle}
+                                name={el.body.name}
+                                click={(id) => this.onClickHandler(id)}
+                                isActive={el.isActive}/>
             })}
         </div>
             )

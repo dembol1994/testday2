@@ -8,11 +8,11 @@
     box-sizing: border-box;
     margin: 10px auto;
     text-align: center;
-    cursor: pointer;
     padding: 10px;
 }
 
 .NavLink a {
     text-decoration: none;
+    cursor: pointer;
     color: rgb(187,246,255);
 }

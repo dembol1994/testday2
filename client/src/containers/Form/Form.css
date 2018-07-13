@@ -11,6 +11,13 @@
     height: auto;
     background-color: white;
     border: 1px outset;
+    animation-name: form;
+    animation-duration: 1s;
+}
+
+@keyframes form {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
 .topDiv {
@@ -131,15 +138,19 @@
     background-color: inherit;
     border: none;
     color: grey;
+    user-select: none;
 }
 
 .Save {
-    background-color: aquamarine;
+    user-select: none;
+    background-color: rgb(99, 175, 252);
     border-radius: 10px;
-    border-color: aquamarine;
+    border: none;
 }
 
+
 .Delete {
+    user-select: none;
     background-color: rgb(224, 110, 110);
     border-radius: 10px;
     border-color: rgb(224, 110, 110);

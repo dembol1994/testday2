@@ -94,7 +94,6 @@ class Form extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.id)
         if (this.props.match.params.id) {
             this.props.editDataFunc(this.props.match.params.id);
             this.setState({inEditMode: true})

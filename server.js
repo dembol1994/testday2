@@ -10,8 +10,8 @@ let services = [
     {
         id: 1,
         body: {
-            name: 'Damian',
-            subtitle: 'Booking',
+            name: 'Cleaning',
+            subtitle: 'We will make your home or office sparkle',
             minHours: '2',
             maxHours: '3',
             pricePerHour: '12',
@@ -24,8 +24,8 @@ let services = [
     {
         id: 2,
         body: {
-            name: 'Magdalena',
-            subtitle: 'Short Text',
+            name: 'Cooking',
+            subtitle: 'Let our chefs make you delicious meals',
             minHours: '2',
             maxHours: '3',
             pricePerHour: '12',
@@ -38,8 +38,8 @@ let services = [
     {
         id: 3,
         body: {
-            name: 'Roman',
-            subtitle: 'Nie wiem nic',
+            name: 'Handyman',
+            subtitle: 'General help around you home office',
             minHours: '2',
             maxHours: '3',
             pricePerHour: '12',
@@ -82,7 +82,7 @@ app.get('/services', (req, res) => {
     }
 })
 
-app.get('/edit', (req, res) => {
+app.get('/services/edit', (req, res) => {
     let data;
     services.forEach(el => {
         if (!el) return;
